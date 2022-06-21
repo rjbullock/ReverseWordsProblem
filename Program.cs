@@ -3,19 +3,26 @@ using System.Linq;
 
 List<string> lines = new List<string>();
 
-string tmpCount = "";
-int count = 0;
+string tmplineCount = "";
+int lineCount = 0;
+int maxWords = 5;
+int maxCharsPerWord = 10;
 
 do
 {
     Console.WriteLine("How many lines total?");
-    tmpCount = Console.ReadLine();
+    tmplineCount = Console.ReadLine();
+
+    if(!int.TryParse(tmplineCount, out lineCount))
+    {
+        Console.WriteLine("That is not an integer. Please enter a digit.");
+    }
 }
-while (!int.TryParse(tmpCount, out count));
+while (!int.TryParse(tmplineCount, out lineCount));
 
-Console.WriteLine("Enter your lines next, separating each word with a space. No more than 5 words per line.");
+Console.WriteLine("Enter your lines next, separating each word with a space. No more than " + maxWords + " words per line and no more than " + maxCharsPerWord + " letters per word.");
 
-for(int i = 0; i < count; i++)
+for(int i = 0; i < lineCount; i++)
 {
     var counter = i + 1;
     
@@ -23,9 +30,32 @@ for(int i = 0; i < count; i++)
     
     var tmpLine = Console.ReadLine();
 
-    if (!String.IsNullOrEmpty(tmpLine) && tmpLine.Split(" ").Count() <= 5)
+    if (!String.IsNullOrEmpty(tmpLine))
     {
-        lines.Add(tmpLine);
+        var tmpLineArray = tmpLine.Split(" ");
+
+        //Don't exceed maximum words per line.
+        if (tmpLineArray.Count() <= maxWords) {
+
+            var wordsTooLong = tmpLineArray.Where(l => l.Length > maxCharsPerWord).ToList();
+            
+            //Don't exceed maximum characters.
+            if(wordsTooLong.Count > 0)
+            {
+                Console.WriteLine("Too many letters in these words: {0} Please try again.", String.Join<string>(" ", wordsTooLong));
+                i--;
+            }
+            else
+            {
+                lines.Add(tmpLine);
+            }
+        }
+        else
+        {
+            Console.WriteLine("Too many words were entered! Try again.");
+            i--;
+        }
+        
     }
     else
     {
@@ -43,5 +73,3 @@ foreach(var line in lines)
     }
     Console.WriteLine();
 }
-
-Console.WriteLine(tmpCount);
