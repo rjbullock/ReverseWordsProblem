@@ -59,7 +59,7 @@ for(int i = 0; i < lineCount; i++)
     }
     else
     {
-        Console.WriteLine("That line was not valid. Try again.");
+        Console.WriteLine("Please no empty lines.");
         i--;
     }
 }
