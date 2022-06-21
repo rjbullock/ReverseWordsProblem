@@ -30,14 +30,15 @@ for(int i = 0; i < lineCount; i++)
     
     var tmpLine = Console.ReadLine();
 
+    //Don
     if (!String.IsNullOrEmpty(tmpLine))
     {
-        var tmpLineArray = tmpLine.Split(" ");
+        var tmpWords = tmpLine.Split(" ");
 
         //Don't exceed maximum words per line.
-        if (tmpLineArray.Count() <= maxWords) {
+        if (tmpWords.Count() <= maxWords) {
 
-            var wordsTooLong = tmpLineArray.Where(l => l.Length > maxCharsPerWord).ToList();
+            var wordsTooLong = tmpWords.Where(l => l.Length > maxCharsPerWord).ToList();
             
             //Don't exceed maximum characters.
             if(wordsTooLong.Count > 0)
@@ -67,9 +68,11 @@ for(int i = 0; i < lineCount; i++)
 foreach(var line in lines)
 {
     var tmpLine = line.Split(" ").Reverse().ToArray();
+
     foreach(var word in tmpLine)
     {
         Console.Write(word + " ");
     }
+
     Console.WriteLine();
 }
