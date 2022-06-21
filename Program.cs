@@ -42,7 +42,7 @@ for(int i = 0; i < lineCount; i++)
             //Don't exceed maximum characters.
             if(wordsTooLong.Count > 0)
             {
-                Console.WriteLine("Too many letters in these words: {0} Please try again.", String.Join<string>(" ", wordsTooLong));
+                Console.WriteLine("Too many letters in these words: '{0}' Please try again.", String.Join<string>(" ", wordsTooLong));
                 i--;
             }
             else
