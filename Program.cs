@@ -19,7 +19,7 @@ for(int i = 0; i < count; i++)
 {
     var counter = i + 1;
     
-    Console.WriteLine("Enter Line " + counter + ", separting each word with a space. No more than 5 ");
+    Console.WriteLine("Enter Line " + counter);
     
     var tmpLine = Console.ReadLine();
 
